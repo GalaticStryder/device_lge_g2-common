@@ -15,6 +15,7 @@
 #
 
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
+include device/qcom/common/BoardConfigCommon.mk
 
 # Architecture
 TARGET_ARCH := arm
@@ -41,6 +42,10 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x05000000 --tags_offset 0x00000100
 TARGET_KERNEL_SOURCE := kernel/lge/msm8974
 
+# Filesystems
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+
 # Audio
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
 BOARD_USES_ALSA_AUDIO := true
@@ -62,8 +67,7 @@ COMMON_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
     -DBOARD_CHARGING_CMDLINE_VALUE='"chargerlogo"'
 
-# CMHW
-BOARD_HARDWARE_CLASS := device/lge/g2-common/cmhw/
+# Touch Gestures (Not available for now!)
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Display
@@ -101,8 +105,6 @@ COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 TARGET_RECOVERY_FSTAB = device/lge/g2-common/rootdir/etc/fstab.g2
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
@@ -110,11 +112,12 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 # RIL
 BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
 
-# SELinux policies
-include device/qcom/sepolicy/sepolicy.mk
-
+# SEPolicy
 BOARD_SEPOLICY_DIRS += \
     device/lge/g2-common/sepolicy
+
+# Keymaster
+TARGET_HW_KEYMASTER_V03 := true
 
 # Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
