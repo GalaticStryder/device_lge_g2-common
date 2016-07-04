@@ -17,6 +17,7 @@
 <!-- Camera app resources that may need to be customized
      for different hardware or product builds. -->
 <resources>
+
     <!-- Opens front camera using openLegacy() -->
     <bool name="front_camera_open_legacy">false</bool>
 

@@ -88,7 +88,6 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Snap \
     camera.msm8974
 
 # Charger
@@ -101,10 +100,6 @@ PRODUCT_PACKAGES += \
     gralloc.msm8974 \
     hwcomposer.msm8974 \
     memtrack.msm8974
-
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
 
 # GPS
 PRODUCT_PACKAGES += \

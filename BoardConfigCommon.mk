@@ -14,8 +14,11 @@
 # limitations under the License.
 #
 
+# Includes
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
+-include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
 include device/qcom/common/BoardConfigCommon.mk
+include device/qcom/common/utils.mk
 
 # Architecture
 TARGET_ARCH := arm
@@ -25,7 +28,7 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := krait
-USE_CLANG_PLATFORM_BUILD := true
+#USE_CLANG_PLATFORM_BUILD := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := galbi
@@ -67,8 +70,17 @@ COMMON_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
     -DBOARD_CHARGING_CMDLINE_VALUE='"chargerlogo"'
 
-# Touch Gestures (Not available for now!)
+# Touch Gestures
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
+
+# Dex-preoptimization
+ifeq ($(HOST_OS),linux)
+  ifeq ($(WITH_DEXPREOPT),)
+    WITH_DEXPREOPT := true
+    WITH_DEXPREOPT_COMP := false
+  endif
+endif
+DONT_DEXPREOPT_PREBUILTS := true
 
 # Display
 HAVE_ADRENO_SOURCE := false
@@ -99,6 +111,9 @@ TARGET_POWERHAL_VARIANT := qcom
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
+TARGET_USES_QCOM_BSP := true
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_USES_AOSP := false
 
 # Recovery
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
@@ -116,9 +131,6 @@ BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
 BOARD_SEPOLICY_DIRS += \
     device/lge/g2-common/sepolicy
 
-# Keymaster
-TARGET_HW_KEYMASTER_V03 := true
-
 # Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -129,3 +141,6 @@ BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
+
+# Keymaster
+#TARGET_HW_KEYMASTER_V03 := true
