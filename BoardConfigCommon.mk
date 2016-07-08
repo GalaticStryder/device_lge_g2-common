@@ -16,7 +16,7 @@
 
 # Includes
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
--include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
+#-include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
 include device/qcom/common/BoardConfigCommon.mk
 include device/qcom/common/utils.mk
 
@@ -111,9 +111,9 @@ TARGET_POWERHAL_VARIANT := qcom
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
-TARGET_USES_QCOM_BSP := true
-TARGET_COMPILE_WITH_MSM_KERNEL := true
-TARGET_USES_AOSP := false
+#TARGET_USES_QCOM_BSP := true
+#TARGET_COMPILE_WITH_MSM_KERNEL := true
+#TARGET_USES_AOSP := false
 
 # Recovery
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
@@ -143,4 +143,4 @@ WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 
 # Keymaster
-#TARGET_HW_KEYMASTER_V03 := true
+TARGET_HW_KEYMASTER_V03 := true
