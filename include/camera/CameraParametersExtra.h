@@ -42,4 +42,3 @@ static const char VIDEO_WDR_OFF[]; \
 static const char VIDEO_WDR_ON[]; \
 static const char OBJECT_TRACKING_ON[]; \
 static const char OBJECT_TRACKING_OFF[];
-

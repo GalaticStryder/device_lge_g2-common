@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2013-2015 The CyanogenMod Project
+# Copyright (C) 2016 The Paranoid Android Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -81,7 +81,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bcm4335_prepatch.hcd:system/vendor/firmware/bcm4335_prepatch.hcd
 
-# BoringSSL compatability wrapper
+# BoringSSL
 PRODUCT_PACKAGES += \
     libboringssl-compat \
     libstlport
@@ -114,13 +114,12 @@ PRODUCT_COPY_FILES += \
 
 # Init
 PRODUCT_PACKAGES += \
-    fstab.g2 \
-    init.g2.rc \
-    init.g2.power.rc \
-    init.g2.usb.rc \
-    init.recovery.g2.rc \
-    set_baseband.sh \
-    ueventd.g2.rc
+    fstab.qcom \
+    init.qcom.rc \
+    init.qcom.power.rc \
+    init.qcom.usb.rc \
+    init.baseband.sh \
+    ueventd.qcom.rc
 
 # IPv6 tethering
 PRODUCT_PACKAGES += \

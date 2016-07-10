@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2013-2015 The CyanogenMod Project
+# Copyright (C) 2016 The Paranoid Android Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 
 # Includes
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
-#-include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
 include device/qcom/common/BoardConfigCommon.mk
-include device/qcom/common/utils.mk
 
 # Architecture
 TARGET_ARCH := arm
@@ -39,7 +37,7 @@ TARGET_NO_RADIOIMAGE := true
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := device/lge/g2-common/releasetools/mkbootimg.mk
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=g2 user_debug=31
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x05000000 --tags_offset 0x00000100
@@ -70,7 +68,7 @@ COMMON_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
     -DBOARD_CHARGING_CMDLINE_VALUE='"chargerlogo"'
 
-# Touch Gestures
+# Gestures
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Dex-preoptimization
@@ -100,7 +98,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672 # 22M
-BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200 #700M
+BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200 # 700M
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672 # 22M
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560 # 2.5G (actually 2.75, but leave room for model variation)
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 13725837312 # 12.8G (its much larger, but this is enough for now)
@@ -111,13 +109,13 @@ TARGET_POWERHAL_VARIANT := qcom
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
-#TARGET_USES_QCOM_BSP := true
-#TARGET_COMPILE_WITH_MSM_KERNEL := true
-#TARGET_USES_AOSP := false
+
+# Keymaster
+TARGET_HW_KEYMASTER_V03 := true
 
 # Recovery
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
-TARGET_RECOVERY_FSTAB = device/lge/g2-common/rootdir/etc/fstab.g2
+TARGET_RECOVERY_FSTAB = device/lge/g2-common/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
 
@@ -141,6 +139,3 @@ BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
-
-# Keymaster
-TARGET_HW_KEYMASTER_V03 := true

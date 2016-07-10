@@ -132,7 +132,7 @@ def pad_image(image_name):
 
 def get_sha1(image_name):
     return hashlib.sha1(open(image_name, 'rb').read()).hexdigest()
-    
+
 
 def finish(out_image):
     print("bumped image: %s" % out_image)
