@@ -281,6 +281,10 @@ on boot
     chown system camera /sys/class/leds/led:flash_torch/brightness
     chmod 0660 /sys/class/leds/led:flash_torch/brightness
 
+    # Power Supply
+    chown system system /sys/class/power_supply/ac/charger_timer
+    chown system system /sys/class/power_supply/battery/charging_enabled
+
     # Hardware tunables
     chown root system /sys/devices/platform/tspdrv/nforce_timed
     chmod 0664 /sys/devices/platform/tspdrv/nforce_timed
@@ -301,6 +305,7 @@ on boot
     write /sys/module/lowmemorykiller/parameters/debug_level 0
 
 on charger
+    # Booting modem
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
     wait /dev/block/platform/msm_sdcc.1/by-name/system
