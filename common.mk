@@ -15,7 +15,7 @@
 #
 
 # Call common vendor
-$(call inherit-product, vendor/galbi/g2-common/g2-common-vendor.mk)
+$(call inherit-product, vendor/lge/g2-common/g2-common-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
