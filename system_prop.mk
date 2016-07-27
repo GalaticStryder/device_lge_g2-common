@@ -7,6 +7,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
     persist.audio.dualmic.config=endfire \
+    media.aac_51_output_enabled=true \
     use.voice.path.for.pcm.voip=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -46,20 +47,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
 
-# Media/offload
-# TODO: Re-enable when it works
+# Offload (R.I.P. +07/29/2016)
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.buffer.size.kb=32 \
-    audio.offload.gapless.enabled=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true \
-    av.streaming.offload.enable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
+    av.offload.enable=false \
+    audio.offload.disable=1 \
+    audio.offload.gapless.enabled=false \
+    audio.offload.video=false
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
