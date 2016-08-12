@@ -40,4 +40,5 @@
 
     <!-- Enable support for LGE HDR -->
     <bool name="lge_hdr_mode">true</bool>
+
 </resources>
