@@ -44,6 +44,7 @@ TARGET_KERNEL_SOURCE := kernel/lge/msm8974
 # Filesystems
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+TARGET_KERNEL_HAVE_EXFAT := true
 
 # Audio
 AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := false
@@ -59,23 +60,18 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 USE_DEVICE_SPECIFIC_CAMERA := true
 
-# Charging
+# Charging/Alarms
+BOARD_CHARGING_CMDLINE_NAME := "androidboot.mode"
+BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
 BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
-COMMON_GLOBAL_CFLAGS += \
-    -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
-    -DBOARD_CHARGING_CMDLINE_VALUE='"chargerlogo"'
+BOARD_CHARGER_ENABLE_ALARM := true
+BOARD_CHARGER_ENABLE_SUSPEND := true
 
 # Gestures
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Dex-preoptimization
-ifeq ($(HOST_OS),linux)
-  ifeq ($(WITH_DEXPREOPT),)
-    WITH_DEXPREOPT := true
-    WITH_DEXPREOPT_COMP := false
-  endif
-endif
-DONT_DEXPREOPT_PREBUILTS := true
+WITH_DEXPREOPT := true
 
 # Display
 HAVE_ADRENO_SOURCE := false

@@ -59,6 +59,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     nfc.app_log_level=2 \
     nfc.enable_protocol_log=0
 
+# Dex-preoptimization
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.image-dex2oat-filter=everything \
+    dalvik.vm.dex2oat-swap=false
+
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
