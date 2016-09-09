@@ -116,7 +116,7 @@ TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
 # RIL
-BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
+TARGET_RIL_VARIANT := caf
 
 # SEPolicy
 #BOARD_SEPOLICY_DIRS += \
