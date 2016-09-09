@@ -58,7 +58,8 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Camera
-COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
+# TODO: Try to refactor our blobs and get rid of this old API.
+#COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charging/Alarms
@@ -119,7 +120,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
 
 # SEPolicy
-BOARD_SEPOLICY_DIRS += \
+#BOARD_SEPOLICY_DIRS += \
     device/lge/g2-common/sepolicy
 
 # Wi-Fi
