@@ -29,7 +29,11 @@ import init.qcom.power.rc
 import init.qcom.usb.rc
 
 on early-init
-    # Create a dummy diag_lge to unbreak LG proprietary tools
+    # Mount userspace debugfs
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
+    # Create dummy diag_lge device
     symlink /dev/diag /dev/diag_lge
 
     mkdir /sys 0771 system system
