@@ -58,8 +58,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Camera
-# TODO: Try to refactor our blobs and get rid of this old API.
-#COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
+BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charging/Alarms
