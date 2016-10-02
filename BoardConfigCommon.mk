@@ -16,7 +16,7 @@
 
 # Includes
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
-include device/qcom/common/BoardConfigCommon.mk
+include device/qcom/common/common.mk
 
 # Architecture
 TARGET_ARCH := arm

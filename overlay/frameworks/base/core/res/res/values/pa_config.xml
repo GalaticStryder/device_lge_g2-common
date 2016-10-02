@@ -18,7 +18,7 @@
 <resources>
 
     <!-- Keycodes of gestures. If the gesture is not supported set it to 0. -->
-    <integer name="config_doubleTapKeyCode">143</integer>
+    <!-- integer name="config_doubleTapKeyCode">143</integer -->
 
     <!-- Default settings for gestures
             0 - Disabled
@@ -30,16 +30,16 @@
             6 - Previous music
             7 - Open camera
             8 - Open dialer -->
-    <integer name="config_doubleTapDefault">1</integer>
+    <!-- integer name="config_doubleTapDefault">1</integer -->
 
     <!-- Whether to intercept inputs on screen off. -->
-    <bool name="config_enableKeyHandler">true</bool>
+    <!-- bool name="config_enableKeyHandler">true</bool -->
 
     <!-- Default value for proximity check on screen wake
          NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)
-    -->
     <bool name="config_proximityCheckOnWake">true</bool>
     <integer name="config_proximityCheckTimeout">350</integer>
     <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
+    -->
 
 </resources>

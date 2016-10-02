@@ -323,7 +323,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareKeys">64</integer>
+    <!-- integer name="config_deviceHardwareKeys">64</integer -->
 
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
                   autodetected from the Configuration. -->
@@ -332,7 +332,7 @@
     <bool name="config_lidControlsSleep">true</bool>
 
     <!-- Disable Button backlight settings -->
-    <integer name="config_buttonBrightnessSettingDefault">0</integer>
+    <!-- integer name="config_buttonBrightnessSettingDefault">0</integer -->
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
