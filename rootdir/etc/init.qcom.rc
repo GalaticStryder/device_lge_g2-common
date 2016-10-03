@@ -52,8 +52,13 @@ on init
 
     symlink /sdcard /storage/sdcard0
 
+    # Setup ZRAM
+    write /sys/block/zram0/comp_algorithm lz4
+    write /sys/block/zram0/max_comp_streams 2
+
 on fs
     mount_all ./fstab.qcom
+    swapon_all ./fstab.qcom
     restorecon_recursive /persist
     restorecon_recursive /persist-lg
     restorecon_recursive /sns
@@ -249,9 +254,6 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # Load the exfat-nofuse module
-    insmod /system/lib/modules/exfat.ko
-
     # create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
@@ -301,7 +303,7 @@ on boot
 on charger
     # Booting modem
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
     wait /dev/block/platform/msm_sdcc.1/by-name/system
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
 
@@ -323,7 +325,6 @@ service audiod /system/bin/audiod
 service charger /sbin/healthd -c
     class charger
     critical
-    seclabel u:r:healthd:s0
 
 service conn_init /system/bin/hwaddrs
     class late_start

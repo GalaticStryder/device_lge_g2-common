@@ -10,6 +10,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true \
     use.voice.path.for.pcm.voip=true
 
+# Fluence
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.audiorec=false \
     persist.audio.fluence.speaker=true \
@@ -58,11 +59,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     nfc.app_log_level=2 \
     nfc.enable_protocol_log=0
-
-# Dex-preoptimization
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.image-dex2oat-filter=everything \
-    dalvik.vm.dex2oat-swap=false
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -120,7 +116,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.ar.hal=e \
     persist.sys.ssr.enable_debug=0
 
-# Storage
+# Sdcardfs
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
 
@@ -128,3 +124,28 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.data.large_tcp_window_size=true \
     wifi.interface=wlan0
+
+# Dalvik VM
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.image-dex2oat-filter=everything \
+    dalvik.vm.dex2oat-swap=false \
+    dalvik.vm.heapstartsize=24m \
+    dalvik.vm.heapgrowthlimit=320m \
+    dalvik.vm.heapsize=768m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=2m \
+    dalvik.vm.heapmaxfree=8m
+
+# HWUI
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.texture_cache_size=96 \
+    ro.hwui.layer_cache_size=64 \
+    ro.hwui.r_buffer_cache_size=12 \
+    ro.hwui.path_cache_size=39 \
+    ro.hwui.gradient_cache_size=1 \
+    ro.hwui.drop_shadow_cache_size=7 \
+    ro.hwui.texture_cache_flushrate=0.4 \
+    ro.hwui.text_small_cache_width=2048 \
+    ro.hwui.text_small_cache_height=2048 \
+    ro.hwui.text_large_cache_width=3072 \
+    ro.hwui.text_large_cache_height=2048
