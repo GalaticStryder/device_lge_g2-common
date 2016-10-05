@@ -2,24 +2,9 @@
 # System Properties for the LG G2
 #
 
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    af.fast_track_multiplier=1 \
-    audio_hal.period_size=192 \
-    persist.audio.dualmic.config=endfire \
-    media.aac_51_output_enabled=true \
-    use.voice.path.for.pcm.voip=true
-
-# Fluence
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.fluence.audiorec=false \
-    persist.audio.fluence.speaker=true \
-    persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.voicerec=false \
-    ro.qc.sdk.audio.fluencetype=fluence
-
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
+    bluetooth.hfp.client=1 \
     bluetooth.chip.vendor=brcm \
     persist.service.bdroid.a2dp_con=0 \
     persist.service.bdroid.scms_t=0 \
@@ -43,17 +28,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
+# Fluence
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.fluence.audiorec=false \
+    persist.audio.fluence.speaker=false \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    ro.qc.sdk.audio.fluencetype=fluence
+
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
-
-# Offload (R.I.P. +07/29/2016)
-PRODUCT_PROPERTY_OVERRIDES += \
-    av.offload.enable=false \
-    audio.offload.disable=1 \
-    audio.offload.gapless.enabled=false \
-    audio.offload.video=false
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -64,18 +50,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
 
-# QMI
+# Radio/QMI
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.netmgrd.qos.enable=false \
+    persist.data.netmgrd.qos.enable=true \
+    persist.data.tcpackprio.enable=true \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.telephony.oosisdc=false \
     persist.data.qmi.adb_logmask=0 \
     persist.qcril.disable_retry=true \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
-    ro.use_data_netmgrd=true
-
-# Radio
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1 \
-    persist.telephony.oosisdc=false
+    ro.use_data_netmgrd=true \
+    ro.telephony.call_ring.multiple=0 \
+    ro.ril.ext.ecclist=112,911,999,110,122,119,120,000,08,118
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \

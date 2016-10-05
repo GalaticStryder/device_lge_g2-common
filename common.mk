@@ -46,29 +46,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
 # System properties
--include $(LOCAL_PATH)/system_prop.mk
+include $(LOCAL_PATH)/system_prop.mk
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Audio
-PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.primary.msm8974 \
-    audio.r_submix.default \
-    audio.usb.default \
-    audiod \
-    libaudio-resampler \
-    libqcompostprocbundle \
-    libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libqcomvoiceprocessingdescriptors
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+include $(LOCAL_PATH)/audio/msm8974.mk
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -146,8 +131,8 @@ PRODUCT_PACKAGES += \
 
 # Media
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/audio/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
