@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
-
 BOARD_USES_ALSA_AUDIO := true
 USE_CUSTOM_AUDIO_POLICY := 1
 AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := false
@@ -50,9 +48,9 @@ TARGET_USES_QCOM_MM_AUDIO := true
 # XML
 # The $LOCAL_PATH variable is device/lge/g2-common, not this file/directory.
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
 # Packages
 PRODUCT_PACKAGES += \
