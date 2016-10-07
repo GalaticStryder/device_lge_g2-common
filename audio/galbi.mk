@@ -14,13 +14,12 @@
 # limitations under the License.
 #
 
+LOCAL_PATH := $(call my-dir)
+
 BOARD_USES_ALSA_AUDIO := true
 USE_CUSTOM_AUDIO_POLICY := 1
-#BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := false
-AUDIO_FEATURE_ENABLED_ANC_HEADSET := true
-#AUDIO_FEATURE_ENABLED_EXTN_FLAC_DECODER := true
-#AUDIO_FEATURE_ENABLED_EXTN_RESAMPLER := false
+AUDIO_FEATURE_ENABLED_ANC_HEADSET := false
 AUDIO_FEATURE_ENABLED_FM_POWER_OPT := false
 AUDIO_FEATURE_ENABLED_FLUENCE := true
 AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
@@ -28,30 +27,32 @@ AUDIO_FEATURE_ENABLED_HDMI_SPK := true
 AUDIO_FEATURE_ENABLED_HDMI_EDID := true
 AUDIO_FEATURE_ENABLED_USBAUDIO := true
 AUDIO_FEATURE_ENABLED_HFP := false
-AUDIO_FEATURE_ENABLED_CUSTOMSTEREO := true
+AUDIO_FEATURE_ENABLED_CUSTOMSTEREO := false
 AUDIO_FEATURE_ENABLED_SSR := false
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := false
 AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := false
 AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
 AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
 AUDIO_FEATURE_ENABLED_COMPRESS_CAPTURE := false
+# TODO: Set low latency as default together ULL.
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := false
 AUDIO_FEATURE_ENABLED_LISTEN := false
 AUDIO_FEATURE_ENABLED_AUXPCM_BT := false
 AUDIO_FEATURE_PCM_IOCTL_ENABLED := true
 AUDIO_FEATURE_ENABLED_EXTN_POST_PROC := true
 #DTS_CODEC_M_ := true TODO: Backport this codec from Alcatel.
-DOLBY_DDP := false
-DOLBY_DAP := false
+DOLBY_DDP := true
+DOLBY_DAP := true
 TARGET_USES_QCOM_MM_AUDIO := true
 
 # XML
 # The $LOCAL_PATH variable is device/lge/g2-common, not this file/directory.
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(LOCAL_PATH)/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml
 
-# Helpers
+# Packages
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.msm8974 \
@@ -64,20 +65,29 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors
 
+# DRM
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.service.enabled=true
+
+# Fluence (Calls only)
+# TODO: Rework all this for real.
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.fluence.voicecall=true \
+    ro.qc.sdk.audio.fluencetype=fluence
+
 # Output
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
-    audio.deep_buffer.media=false \
     audio_hal.period_size=192 \
     persist.audio.dualmic.config=endfire \
     media.aac_51_output_enabled=true \
     mm.enable.smoothstreaming=true \
     use.voice.path.for.pcm.voip=true
 
-# Offload (R.I.P. +07/29/2016)
+# Offload
 PRODUCT_PROPERTY_OVERRIDES += \
-    av.offload.enable=false \
-    audio.offload.video=false \
-    audio.offload.disable=1 \
-    audio.offload.gapless.enabled=false \
-    audio.offload.video=false
+    audio.deep_buffer.media=true \
+    audio.offload.buffer.size.kb=32 \
+    audio.offload.video=true \
+    audio.offload.multiple.enabled=false \
+    audio.offload.gapless.enabled=true

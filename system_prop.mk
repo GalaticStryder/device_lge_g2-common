@@ -4,13 +4,12 @@
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    bluetooth.hfp.client=1 \
     bluetooth.chip.vendor=brcm \
     persist.service.bdroid.a2dp_con=0 \
     persist.service.bdroid.scms_t=0 \
     ro.bt.bdaddr_path=/data/misc/bdaddr
 
-# Camera
+# Camera2
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
@@ -23,18 +22,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true \
     ro.opengles.version=196608 \
     ro.sf.lcd_density=480
-
-# DRM
-PRODUCT_PROPERTY_OVERRIDES += \
-    drm.service.enabled=true
-
-# Fluence
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.fluence.audiorec=false \
-    persist.audio.fluence.speaker=false \
-    persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.voicerec=false \
-    ro.qc.sdk.audio.fluencetype=fluence
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -52,16 +39,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio/QMI
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.netmgrd.qos.enable=true \
-    persist.data.tcpackprio.enable=true \
-    persist.radio.apm_sim_not_pwdn=1 \
-    persist.telephony.oosisdc=false \
+    persist.data.netmgrd.qos.enable=false \
     persist.data.qmi.adb_logmask=0 \
     persist.qcril.disable_retry=true \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
     ro.use_data_netmgrd=true \
     ro.telephony.call_ring.multiple=0 \
-    ro.ril.ext.ecclist=112,911,999,110,122,119,120,000,08,118
+    ro.telephony.ril.config=simactivation
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \

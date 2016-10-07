@@ -53,7 +53,7 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Audio
-include $(LOCAL_PATH)/audio/msm8974.mk
+include $(LOCAL_PATH)/audio/galbi.mk
 
 # Bluetooth
 PRODUCT_PACKAGES += \
