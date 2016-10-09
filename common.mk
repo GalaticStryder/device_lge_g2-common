@@ -115,6 +115,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     lights.msm8974
 
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.qcom
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \

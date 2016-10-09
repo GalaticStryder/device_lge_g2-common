@@ -60,15 +60,11 @@ BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 TARGET_ALLOW_TEXT_RELOCATIONS := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
-# Charging/Alarms
+# Charger
 BOARD_CHARGING_CMDLINE_NAME := "androidboot.mode"
 BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
-BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
-BOARD_CHARGER_ENABLE_ALARM := true
-BOARD_CHARGER_ENABLE_SUSPEND := true
-
-# Gestures
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
+# TODO: Add custom charger images support.
+#BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
 
 # Dex-preoptimization
 WITH_DEXPREOPT := true
@@ -82,8 +78,16 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
 
+# Encryption
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_HW_KEYMASTER_V03 := true
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
+
+# Gestures
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -102,11 +106,7 @@ TARGET_POWERHAL_VARIANT := qcom
 # Qualcomm's Time Daemon
 BOARD_USES_QC_TIME_SERVICES := true
 
-# Keymaster
-TARGET_HW_KEYMASTER_V03 := true
-
 # Recovery
-BOARD_NO_SECURE_DISCARD := true
 TARGET_RECOVERY_FSTAB = device/lge/g2-common/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
