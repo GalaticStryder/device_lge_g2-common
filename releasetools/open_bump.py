@@ -135,7 +135,7 @@ def get_sha1(image_name):
 
 
 def finish(out_image):
-    print("bumped image: %s" % out_image)
+    print("Bumped image: %s" % out_image)
     sys.exit(0)
 
 
@@ -143,7 +143,7 @@ def main(in_image, out_image):
     d_in_image = open(in_image, 'rb').read()
     open(out_image, 'wb').write(d_in_image)
     if bumped(d_in_image):
-        print("Image already bumped")
+        print("Image already bumped!")
         finish(out_image)
     pad_image(out_image)
     if POC:
@@ -176,7 +176,7 @@ def cli():
             out_split = os.path.splitext(image_name)
             out_image = out_split[0] + "_bumped" + out_split[1]
     if not os.path.isfile(image_name):
-        print("file not found: %s" % image_name)
+        print("File not found: %s" % image_name)
         sys.exit(1)
     main(image_name, out_image)
 
