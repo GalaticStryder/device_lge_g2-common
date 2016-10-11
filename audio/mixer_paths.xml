@@ -155,7 +155,7 @@
     <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     <ctl name="SLIM_0_RX Format" value="S16_LE" />
     <ctl name="SLIM_0_RX SampleRate" value="KHZ_48" />
-    <ctl name="AUX PCM SampleRate" value="rate_8000" />
+    <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
     <!--  fm   -->
     <ctl name="Internal FM RX Volume" value="0" />
     <ctl name="SLIMBUS_0_RX Port Mixer TERT_MI2S_TX" value="0" />
@@ -243,6 +243,54 @@
         <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
+    <path name="audio-ull-playback">
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback speaker-protected">
+        <path name="audio-ull-playback" />
+    </path>
+
+    <path name="audio-ull-playback headphones">
+      <path name="audio-ull-playback" />
+    </path>
+
+    <path name="audio-ull-playback speaker-and-headphones">
+        <path name="audio-ull-playback" />
+        <path name="audio-ull-playback headphones" />
+    </path>
+
+    <path name="audio-ull-playback hdmi">
+        <ctl name="HDMI Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback bt-sco">
+        <ctl name="AUX_PCM_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback bt-sco-wb">
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
+        <path name="audio-ull-playback bt-sco" />
+    </path>
+
+    <path name="audio-ull-playback speaker-and-hdmi">
+        <path name="audio-ull-playback hdmi" />
+        <path name="audio-ull-playback" />
+    </path>
+
+    <path name="audio-ull-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback usb-headphones">
+        <path name="audio-ull-playback afe-proxy" />
+    </path>
+
+    <path name="audio-ull-playback speaker-and-usb-headphones">
+        <path name="audio-ull-playback usb-headphones" />
+        <path name="audio-ull-playback" />
+    </path>
+
     <path name="multi-channel-playback hdmi">
         <ctl name="HDMI Mixer MultiMedia2" value="1" />
     </path>
@@ -312,11 +360,11 @@
     </path>
 
     <path name="bt-sco-samplerate">
-        <ctl name="AUX PCM SampleRate" value="rate_8000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
     </path>
 
     <path name="bt-sco-wb-samplerate">
-        <ctl name="AUX PCM SampleRate" value="rate_16000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
     </path>
 
     <path name="voice-call usb-headphones">
@@ -376,14 +424,14 @@
 
     <path name="voip-loopback bt-sco">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
-        <ctl name="AUX PCM SampleRate" value="rate_8000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
     </path>
 
     <path name="voip-loopback bt-sco-wb">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
-        <ctl name="AUX PCM SampleRate" value="rate_16000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
     </path>
