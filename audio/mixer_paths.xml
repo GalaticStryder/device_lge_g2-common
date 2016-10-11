@@ -155,7 +155,7 @@
     <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     <ctl name="SLIM_0_RX Format" value="S16_LE" />
     <ctl name="SLIM_0_RX SampleRate" value="KHZ_48" />
-    <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
+    <ctl name="AUX PCM SampleRate" value="8000" />
     <!--  fm   -->
     <ctl name="Internal FM RX Volume" value="0" />
     <ctl name="SLIMBUS_0_RX Port Mixer TERT_MI2S_TX" value="0" />
@@ -186,7 +186,8 @@
     </path>
 
     <path name="deep-buffer-playback bt-sco-wb">
-        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
+        <ctl name="AUX PCM SampleRate" value="16000" />
+        <path name="deep-buffer-playback bt-sco" />
     </path>
 
     <path name="deep-buffer-playback afe-proxy">
@@ -213,12 +214,14 @@
     <path name="low-latency-playback hdmi">
         <ctl name="HDMI Mixer MultiMedia5" value="1" />
     </path>
+
     <path name="low-latency-playback bt-sco">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
     <path name="low-latency-playback bt-sco-wb">
-        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia5" value="1" />
+        <ctl name="AUX PCM SampleRate" value="16000" />
+        <path name="low-latency-playback bt-sco" />
     </path>
 
     <path name="low-latency-playback speaker-and-hdmi">
@@ -269,7 +272,7 @@
     </path>
 
     <path name="audio-ull-playback bt-sco-wb">
-        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
+        <ctl name="AUX PCM SampleRate" value="16000" />
         <path name="audio-ull-playback bt-sco" />
     </path>
 
@@ -308,12 +311,52 @@
     </path>
 
     <path name="compress-offload-playback bt-sco-wb">
-        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia4" value="1" />
+        <ctl name="AUX PCM SampleRate" value="16000" />
+        <path name="compress-offload-playback bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
+    <path name="compress-offload-playback usb-headphones">
+        <path name="compress-offload-playback afe-proxy" />
+    </path>
+
+    <path name="compress-offload-playback speaker-and-usb-headphones">
+        <path name="compress-offload-playback usb-headphones" />
+        <path name="compress-offload-playback" />
     </path>
 
     <path name="compress-offload-playback speaker-and-hdmi">
         <path name="compress-offload-playback hdmi" />
         <path name="compress-offload-playback" />
+    </path>
+
+    <path name="compress-offload-playback2">
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia6" value="1" />
+    </path>
+
+    <path name="compress-offload-playback2 bt-sco">
+        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia6" value="1" />
+    </path>
+
+    <path name="compress-offload-playback2 bt-sco-wb">
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
+        <path name="compress-offload-playback2 bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback2 afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia6" value="1" />
+    </path>
+
+    <path name="compress-offload-playback2 usb-headphones">
+        <path name="compress-offload-playback2 afe-proxy" />
+    </path>
+
+    <path name="compress-offload-playback2 speaker-and-usb-headphones">
+        <path name="compress-offload-playback2 usb-headphones" />
+        <path name="compress-offload-playback2" />
     </path>
 
     <path name="audio-record">
@@ -329,7 +372,8 @@
     </path>
 
     <path name="audio-record bt-sco-wb">
-        <ctl name="MultiMedia1 Mixer SEC_AUX_PCM_UL_TX" value="1" />
+        <ctl name="AUX PCM SampleRate" value="16000" />
+        <path name="audio-record bt-sco" />
     </path>
 
     <path name="audio-record capture-fm">
@@ -338,6 +382,19 @@
 
     <path name="low-latency-record">
         <ctl name="MultiMedia5 Mixer SLIM_0_TX" value="1" />
+    </path>
+
+    <path name="low-latency-record usb-headset-mic">
+        <ctl name="MultiMedia5 Mixer AFE_PCM_TX" value="1" />
+    </path>
+
+    <path name="low-latency-record bt-sco">
+        <ctl name="MultiMedia5 Mixer INTERNAL_BT_SCO_TX" value="1" />
+    </path>
+
+    <path name="low-latency-record bt-sco-wb">
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
+        <path name="audio-record bt-sco" />
     </path>
 
     <path name="voice-call">
@@ -356,15 +413,18 @@
     </path>
 
     <path name="voice-call bt-sco-wb">
+        <ctl name="AUX PCM SampleRate" value="16000" />
         <path name="voice-call bt-sco" />
     </path>
 
+    <!-- BT SCO samplerate -->
     <path name="bt-sco-samplerate">
-        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_8KHZ" />
     </path>
 
+    <!-- BT SCO WB Sample Rate -->
     <path name="bt-sco-wb-samplerate">
-        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
     </path>
 
     <path name="voice-call usb-headphones">
@@ -388,7 +448,8 @@
     </path>
 
     <path name="voice2-call bt-sco-wb">
-        <path name="voice-call bt-sco" />
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
+        <path name="voice2-call bt-sco" />
     </path>
 
     <path name="voice2-call usb-headphones">
@@ -402,12 +463,18 @@
     </path>
 
     <path name="compress-voip-call bt-sco">
-        <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
-        <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
+        <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer Voip" value="1" />
+        <ctl name="Voip_Tx Mixer INTERNAL_BT_SCO_TX_Voip" value="1" />
     </path>
 
     <path name="compress-voip-call bt-sco-wb">
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
         <path name="compress-voip-call bt-sco" />
+    </path>
+
+    <path name="compress-voip-call usb-headphones">
+        <ctl name="AFE_PCM_RX_Voice Mixer Voip" value="1" />
+        <ctl name="Voip_Tx Mixer AFE_PCM_TX_Voip" value="1" />
     </path>
 
     <path name="play-fm">
@@ -424,18 +491,30 @@
 
     <path name="voip-loopback bt-sco">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
-        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
+        <ctl name="AUX PCM SampleRate" value="8000" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
     </path>
 
     <path name="voip-loopback bt-sco-wb">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
-        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
+        <ctl name="AUX PCM SampleRate" value="16000" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
     </path>
     <!-- 2013-10-24, jongyeol.yang,  voip loopback -->
+
+    <path name="hfp-sco">
+        <ctl name="SLIMBUS_0_RX Port Mixer INTERNAL_BT_SCO_TX" value="1" />
+        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia6" value="1" />
+        <ctl name="MultiMedia6 Mixer SLIM_0_TX" value="1" />
+        <ctl name="SLIMBUS_DL_HL Switch" value="1" />
+    </path>
+
+    <path name="hfp-sco-wb">
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
+        <path name="hfp-sco" />
+    </path>
 
     <!-- 2013-11-07, sangchul.yoon,  voice call recording -->
     <path name="incall-rec-uplink">
@@ -532,8 +611,8 @@
 
     <path name="handset-mic">
         <path name="adc1" />
-	<ctl name="ADC1 Volume" value="12" />
-	<ctl name="DEC6 Volume" value="68" />
+        <ctl name="ADC1 Volume" value="12" />
+        <ctl name="DEC6 Volume" value="68" />
     </path>
 
     <path name="handset-hac">

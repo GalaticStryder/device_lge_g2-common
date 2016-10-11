@@ -7,6 +7,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.chip.vendor=brcm \
     persist.service.bdroid.a2dp_con=0 \
     persist.service.bdroid.scms_t=0 \
+    qcom.bluetooth.soc=rome \
     ro.bt.bdaddr_path=/data/misc/bdaddr
 
 # Camera2

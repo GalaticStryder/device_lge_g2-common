@@ -14,20 +14,23 @@
 # limitations under the License.
 #
 
+import hashlib
+import common
+import re
 import os
 
 TARGET_DIR = os.getenv('OUT')
 
 # HACK: Hooker for copying the boot.img to the block unconditionally.
 
-def IncrementalOTA_InstallEnd(info):
-  InstallEnd_PushFullBootImage(info)
+def IncrementalOTA_InstallEnd(hack):
+  InstallEnd_PushFullBootImage(hack)
+  return
 
-def FullOTA_InstallEnd(info):
-  InstallEnd_PushFullBootImage(info)
+def FullOTA_InstallEnd(hack):
+  InstallEnd_PushFullBootImage(hack)
+  return
 
-def InstallEnd_PushFullBootImage(info):
-  info.script.script = [cmd for cmd in info.script.script if not "boot.img" in cmd]
-  info.script.script = [cmd for cmd in info.script.script if not "show_progress(0.100000, 0);" in cmd]
-  info.script.AppendExtra('package_extract_file("boot.img", "/tmp/boot.img");')
-  info.script.AppendExtra('assert(run_program("/sbin/sh", "-c", "busybox dd if=/tmp/boot.img of=/dev/block/platform/msm_sdcc.1/by-name/boot") == 0);')
+def InstallEnd_PushFullBootImage(hack):
+  hack.script.Print("Pushing raw boot image to partition...")
+  hack.script.WriteRawImage("/boot", "boot.img")

@@ -62,13 +62,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bcm4335_prepatch.hcd:system/vendor/firmware/bcm4335_prepatch.hcd
 
-# BoringSSL
-PRODUCT_PACKAGES += \
-    libboringssl-compat \
-    libstlport
-
 # Camera
 PRODUCT_PACKAGES += \
+    SnapdragonCamera \
     camera.msm8974
 
 # Charger
@@ -155,15 +151,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     power.msm8974
 
-# Qualcomm
+# Recovery
+PRODUCT_PACKAGES += \
+    librecovery_updater_g2
+
+# RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
     libxml2
-
-# Recovery
-PRODUCT_PACKAGES += \
-    librecovery_updater_g2
 
 # Sensors
 PRODUCT_COPY_FILES += \

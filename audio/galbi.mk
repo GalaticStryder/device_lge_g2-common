@@ -24,7 +24,7 @@ AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 AUDIO_FEATURE_ENABLED_HDMI_SPK := true
 AUDIO_FEATURE_ENABLED_HDMI_EDID := true
 AUDIO_FEATURE_ENABLED_USBAUDIO := true
-AUDIO_FEATURE_ENABLED_HFP := false
+AUDIO_FEATURE_ENABLED_HFP := true
 AUDIO_FEATURE_ENABLED_CUSTOMSTEREO := false
 AUDIO_FEATURE_ENABLED_SSR := false
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := false
@@ -75,6 +75,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecall=true \
     ro.qc.sdk.audio.fluencetype=fluence \
     ro.config.vc_call_vol_steps=8
+
+# HFP
+PRODUCT_PROPERTY_OVERRIDES += \
+    bluetooth.hfp.client=1
 
 # Output
 PRODUCT_PROPERTY_OVERRIDES += \
