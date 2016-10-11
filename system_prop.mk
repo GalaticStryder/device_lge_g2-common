@@ -28,6 +28,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
 
+# Media
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.legacyencoder=true
+
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
     nfc.app_log_level=2 \
@@ -42,10 +46,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=false \
     persist.data.qmi.adb_logmask=0 \
     persist.qcril.disable_retry=true \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.telephony.oosisdc=false \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
-    ro.use_data_netmgrd=true \
-    ro.telephony.call_ring.multiple=0 \
-    ro.telephony.ril.config=simactivation
+    ro.use_data_netmgrd=true
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
