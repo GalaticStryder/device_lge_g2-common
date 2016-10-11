@@ -28,13 +28,14 @@ AUDIO_FEATURE_ENABLED_HFP := false
 AUDIO_FEATURE_ENABLED_CUSTOMSTEREO := false
 AUDIO_FEATURE_ENABLED_SSR := false
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := false
+AUDIO_FEATURE_ENABLED_INCALL_MUSIC := false
 AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := false
+AUDIO_FEATURE_ENABLED_EXTN_OFFLOAD := true
 AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
 AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
 AUDIO_FEATURE_ENABLED_COMPRESS_CAPTURE := false
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
-# TODO: Set low latency as default together ULL.
-AUDIO_FEATURE_LOW_LATENCY_PRIMARY := false
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 AUDIO_FEATURE_ENABLED_LISTEN := false
 AUDIO_FEATURE_ENABLED_AUXPCM_BT := false
 AUDIO_FEATURE_PCM_IOCTL_ENABLED := true
@@ -69,25 +70,26 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
-# Fluence (Calls only)
-# TODO: Rework all this for real.
+# Fluence
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecall=true \
-    ro.qc.sdk.audio.fluencetype=fluence
+    ro.qc.sdk.audio.fluencetype=fluence \
+    ro.config.vc_call_vol_steps=8
 
 # Output
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
-    persist.audio.dualmic.config=endfire \
     media.aac_51_output_enabled=true \
     mm.enable.smoothstreaming=true \
+    persist.audio.dualmic.config=endfire \
     use.voice.path.for.pcm.voip=true
 
 # Offload
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.deep_buffer.media=true \
     audio.offload.buffer.size.kb=32 \
-    audio.offload.video=true \
+    audio.offload.gapless.enabled=true \
     audio.offload.multiple.enabled=false \
-    audio.offload.gapless.enabled=true
+    audio.offload.track.enable=true \
+    audio.offload.video=true
