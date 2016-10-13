@@ -10,10 +10,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=rome \
     ro.bt.bdaddr_path=/data/misc/bdaddr
 
-# Camera2
-PRODUCT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
-
 # SnapdragonCamera
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.feature.restart=true
@@ -31,7 +27,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.legacyencoder=true
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
