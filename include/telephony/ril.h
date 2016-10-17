@@ -67,7 +67,10 @@ extern "C" {
  * RIL_VERSION = 13 : This version includes new wakelock semantics and as the first
  *                    strongly versioned version it enforces structure use.
  */
-#ifdef USE_RIL_VERSION_11
+#if defined(USE_RIL_VERSION_10)
+#define RIL_VERSION 10
+#define LAST_IMPRECISE_RIL_VERSION 10
+#elif defined(USE_RIL_VERSION_11)
 #define RIL_VERSION 11
 #define LAST_IMPRECISE_RIL_VERSION 11
 #else
@@ -986,10 +989,10 @@ typedef struct
   int              pin1_replaced;   /* applicable to USIM, CSIM & ISIM */
   RIL_PinState     pin1;
   RIL_PinState     pin2;
-  int              remaining_count_pin1;  /* LG damage */
-  int              remaining_count_puk1;  /* LG damage */
-  int              remaining_count_pin2;  /* LG damage */
-  int              remaining_count_puk2;  /* LG damage */
+  int              remaining_count_pin1;
+  int              remaining_count_puk1;
+  int              remaining_count_pin2;
+  int              remaining_count_puk2;
 } RIL_AppStatus;
 
 /* Deprecated, use RIL_CardStatus_v6 */
@@ -5988,6 +5991,7 @@ struct RIL_Env {
 
     void (*RequestTimedCallback) (RIL_TimedCallback callback,
                                    void *param, const struct timeval *relativeTime);
+#if (RIL_VERSION == 12 && OSS_LIBRIL)
    /**
     * "t" is parameter passed in on previous call RIL_Notification routine
     *
@@ -5995,6 +5999,7 @@ struct RIL_Env {
     * by them and an ack needs to be sent back to java ril.
     */
     void (*OnRequestAck) (RIL_Token t);
+#endif
 };
 
 
@@ -6051,6 +6056,7 @@ void RIL_register (const RIL_RadioFunctions *callbacks);
 void RIL_onRequestComplete(RIL_Token t, RIL_Errno e,
                            void *response, size_t responselen);
 
+#if (RIL_VERSION == 12 && OSS_LIBRIL)
 /**
  * RIL_onRequestAck will be called by vendor when an Async RIL request was received by them and
  * an ack needs to be sent back to java ril. This doesn't mark the end of the command or it's
@@ -6062,6 +6068,7 @@ void RIL_onRequestComplete(RIL_Token t, RIL_Errno e,
  *          routine.
  */
 void RIL_onRequestAck(RIL_Token t);
+#endif
 
 #if defined(ANDROID_MULTI_SIM)
 /**
