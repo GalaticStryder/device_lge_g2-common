@@ -29,7 +29,8 @@ import init.qcom.power.rc
 import init.qcom.usb.rc
 
 on early-init
-    symlink /dev/diag_lge /dev/diag
+    # Create a dummy diag_lge to unbreak LG proprietary tools
+    symlink /dev/diag /dev/diag_lge
 
     mkdir /sys 0771 system system
     mkdir /firmware 0771 system system
@@ -339,10 +340,6 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
-
-service loc_launcher /system/bin/loc_launcher
-    class late_start
-    group gps inet net_raw qcom_diag net_admin wifi
 
 service mpdecision /system/bin/mpdecision --avg_comp
    class late_start

@@ -41,12 +41,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio/QMI
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.netmgrd.qos.enable=false \
+    persist.data.netmgrd.qos.enable=true \
     persist.data.qmi.adb_logmask=0 \
-    persist.qcril.disable_retry=true \
-    persist.radio.apm_sim_not_pwdn=1 \
-    persist.telephony.oosisdc=false \
+    persist.radio.apm_sim_not_pwdn=true \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
+    ro.telephony.call_ring.multiple=false \
     ro.use_data_netmgrd=true
 
 # Sensors

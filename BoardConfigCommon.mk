@@ -68,7 +68,7 @@ BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
 #BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
 
 # Dex-preoptimization
-WITH_DEXPREOPT := true
+WITH_DEXPREOPT := false
 
 # Display
 HAVE_ADRENO_SOURCE := false
@@ -111,9 +111,9 @@ TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
 # RIL
-TARGET_RIL_VARIANT := caf
 BOARD_GLOBAL_CFLAGS += -DUSE_RIL_VERSION_10
 BOARD_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
+TARGET_RIL_VARIANT := caf
 
 # SEPolicy
 #BOARD_SEPOLICY_DIRS += \
