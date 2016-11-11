@@ -35,15 +35,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     nfc.app_log_level=2 \
     nfc.enable_protocol_log=0
 
-# Perf
+# Performance
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
+    ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so \
+    ro.sys.sdcardfs=true
 
 # Radio/QMI
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=true \
     persist.data.qmi.adb_logmask=0 \
-    rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
+    persist.qcril.disable_retry=true \
+    persist.telephony.oosisdc=false \
+    rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
     ro.telephony.call_ring.multiple=false \
     ro.use_data_netmgrd=true
 
@@ -85,10 +88,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.sensors.hal=e \
     persist.debug.ar.hal=e \
     persist.sys.ssr.enable_debug=0
-
-# Sdcardfs
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=true
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
