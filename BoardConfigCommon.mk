@@ -117,7 +117,7 @@ BOARD_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
 TARGET_RIL_VARIANT := caf
 
 # SEPolicy
-#BOARD_SEPOLICY_DIRS += \
+BOARD_SEPOLICY_DIRS += \
     device/lge/g2-common/sepolicy
 
 # Wi-Fi
