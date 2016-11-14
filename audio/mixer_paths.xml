@@ -259,7 +259,6 @@
     </path>
 
     <path name="audio-ull-playback speaker-and-headphones">
-        <path name="audio-ull-playback" />
         <path name="audio-ull-playback headphones" />
     </path>
 
