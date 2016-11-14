@@ -161,7 +161,7 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
-    librmnetctl \
+    libril_shim \
     libxml2
 
 # Sensors
