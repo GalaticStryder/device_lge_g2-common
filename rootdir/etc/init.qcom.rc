@@ -304,7 +304,7 @@ on boot
 on charger
     # Booting modem
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
     wait /dev/block/platform/msm_sdcc.1/by-name/system
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
 
@@ -326,6 +326,7 @@ service audiod /system/bin/audiod
 service charger /sbin/healthd -c
     class charger
     critical
+    seclabel u:r:healthd:s0
 
 service conn_init /system/bin/hwaddrs
     class late_start
