@@ -66,8 +66,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # Charger
 BOARD_CHARGING_CMDLINE_NAME := "androidboot.mode"
 BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
-# TODO: Add custom charger images support.
-#BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
+BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
 
 # Dex-preoptimization
 WITH_DEXPREOPT := false
@@ -85,7 +84,8 @@ USE_OPENGL_RENDERER := true
 EXTENDED_FONT_FOOTPRINT := true
 
 # Gestures
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
+# TODO: Refactor for nougat.
+# TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
