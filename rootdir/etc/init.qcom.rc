@@ -381,6 +381,7 @@ service baseband-sh /system/bin/sh /init.baseband.sh
     class late_start
     user root
     oneshot
+    disabled
 
 service thermal-engine /system/bin/thermal-engine
     class main
@@ -421,6 +422,9 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
+
+on property:gsm.version.baseband=""
+    start baseband-sh
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
