@@ -76,18 +76,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=fluence \
     ro.config.vc_call_vol_steps=8
 
-# HFP
-PRODUCT_PROPERTY_OVERRIDES += \
-    bluetooth.hfp.client=1
-
 # Output
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
     media.aac_51_output_enabled=true \
     mm.enable.smoothstreaming=true \
-    persist.audio.dualmic.config=endfire \
-    use.voice.path.for.pcm.voip=true
+    persist.audio.dualmic.config=endfire
 
 # Offload
 PRODUCT_PROPERTY_OVERRIDES += \
