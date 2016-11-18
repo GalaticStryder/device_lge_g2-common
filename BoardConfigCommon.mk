@@ -39,6 +39,8 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
+# TODO: Drop BOARD_MKBOOTIMG_ARGS flag in /build. Duplicate offsets for now...
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x05000000 --tags_offset 0x00000100
 BOARD_RAMDISK_OFFSET := 0x05000000
 BOARD_TAGS_OFFSET := 0x00000100
 TARGET_KERNEL_ARCH := arm
@@ -109,9 +111,6 @@ BOARD_USES_QC_TIME_SERVICES := true
 TARGET_RECOVERY_FSTAB = device/lge/g2-common/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
-
-# Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
 # RIL
 BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
