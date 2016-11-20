@@ -85,10 +85,6 @@ USE_OPENGL_RENDERER := true
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# Gestures
-# TODO: Refactor for nougat.
-# TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
-
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -102,7 +98,8 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560 # 2.5G
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 13725837312 # 12.8G
 
 # Power
-TARGET_POWERHAL_VARIANT := qcom
+TARGET_USES_INTERACTION_BOOST := true
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Qualcomm's Time Daemon
 BOARD_USES_QC_TIME_SERVICES := true
