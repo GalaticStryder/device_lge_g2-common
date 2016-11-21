@@ -39,10 +39,9 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-# TODO: Drop BOARD_MKBOOTIMG_ARGS flag in /build. Duplicate offsets for now...
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x05000000 --tags_offset 0x00000100
 BOARD_RAMDISK_OFFSET := 0x05000000
 BOARD_TAGS_OFFSET := 0x00000100
+# BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET)
 TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_SOURCE := kernel/lge/msm8974
 
@@ -71,7 +70,7 @@ BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
 BOARD_HEALTHD_CUSTOM_CHARGER_RES := device/lge/g2-common/charger/images
 
 # Dex-preoptimization
-WITH_DEXPREOPT := false
+WITH_DEXPREOPT := true
 
 # Display
 HAVE_ADRENO_SOURCE := false

@@ -384,6 +384,12 @@ service baseband-sh /system/bin/sh /init.baseband.sh
     oneshot
     disabled
 
+service post-boot-sh /system/bin/sh /lambda-post_boot.sh
+    class late_start
+    user root
+    oneshot
+    disabled
+
 service thermal-engine /system/bin/thermal-engine
     class main
     user root
