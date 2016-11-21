@@ -24,6 +24,14 @@ stop mpdecision # To avoid troubles...
 echo "1" > /sys/devices/system/cpu/cpu0/rq-stats/hotplug_enable
 
 ############################
+# KGSL
+#
+# TODO: Refactor in Kernel.
+#
+# echo "cpubw_hwmon" > /sys/class/devfreq/qcom,cpubw.42/governor
+# echo "msm-adreno-tz" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
+
+############################
 # Governors
 #
 # TODO: Re-do for AOSPA.
