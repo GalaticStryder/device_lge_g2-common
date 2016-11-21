@@ -13,32 +13,19 @@
 #
 stop mpdecision # To avoid troubles...
 
-# TODO:
-# - Add bricked as default hotplug.
-
 ############################
 # RQ Stats
 #
-# TODO: Disable when bricked is shipped.
-#
-echo "1" > /sys/devices/system/cpu/cpu0/rq-stats/hotplug_enable
-
-############################
-# KGSL
-#
-# TODO: Refactor in Kernel.
-#
-# echo "cpubw_hwmon" > /sys/class/devfreq/qcom,cpubw.42/governor
-# echo "msm-adreno-tz" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
+echo "0" > /sys/devices/system/cpu/cpu0/rq-stats/hotplug_enable
 
 ############################
 # Governors
 #
-# TODO: Re-do for AOSPA.
+# TODO: Re-do for AOSPA battery life focus, but keeping impulse.
 #
 # Interactive:
 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-sleep 1 # Wait for interactive sysfs paths.
+sleep 0.25 # Wait for interactive sysfs paths.
 echo "20000 1400000:40000 1700000:20000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
 echo "70" > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
 echo "1190400" > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
@@ -50,7 +37,7 @@ echo "-1" > /sys/devices/system/cpu/cpufreq/interactive/timer_slack
 echo "100000" > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 # Impulse:
 echo "impulse" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-sleep 1 # Wait for impulse sysfs paths.
+sleep 0.25 # Wait for impulse sysfs paths.
 echo "19000 1400000:39000 1700000:19000 2100000:79000" > /sys/devices/system/cpu/cpufreq/impulse/above_hispeed_delay
 echo "95" > /sys/devices/system/cpu/cpufreq/impulse/go_hispeed_load
 echo "1728000" > /sys/devices/system/cpu/cpufreq/impulse/hispeed_freq
@@ -67,13 +54,17 @@ echo "20000" > /sys/devices/system/cpu/cpufreq/impulse/timer_rate
 echo "1" > /sys/module/state_notifier/parameters/enabled
 
 ############################
+# MSM Hotplug
+#
+echo "1" > /sys/module/msm_hotplug/msm_enabled
+
+############################
 # MSM Limiter
 #
 echo "impulse" > /sys/kernel/msm_limiter/scaling_governor
 echo "2265600" > /sys/kernel/msm_limiter/resume_max_freq
 echo "1" > /sys/kernel/msm_limiter/debug_mask
-# TODO: Set this to zero...
-echo "1" > /sys/kernel/msm_limiter/mpd_enabled
+echo "0" > /sys/kernel/msm_limiter/mpd_enabled
 echo "1" > /sys/kernel/msm_limiter/freq_control
 
 ############################
@@ -82,6 +73,14 @@ echo "1" > /sys/kernel/msm_limiter/freq_control
 echo "422400 729600" > /sys/kernel/cpu_input_boost/ib_freqs
 echo "400" > /sys/kernel/cpu_input_boost/ib_duration_ms
 echo "1" > /sys/kernel/cpu_input_boost/enabled
+
+############################
+# GPU
+#
+# TODO: Refactor in Kernel.
+#
+# echo "cpubw_hwmon" > /sys/class/devfreq/qcom,cpubw.42/governor
+# echo "msm-adreno-tz" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
 
 ############################
 # Scheduler/Read Ahead
@@ -105,9 +104,12 @@ echo "50" > /proc/sys/vm/swappiness
 #
 # TODO: Set optimal values.
 #
+echo "1" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+echo "53059" > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
+echo "0" > /sys/module/lowmemorykiller/parameters/debug_level
+# echo "0" > /sys/module/lowmemorykiller/parameters/lmk_fast_run
 # echo "18432,23040,24576,28672,31744,34816" > /sys/module/lowmemorykiller/parameters/minfree
 # echo "48" > /sys/module/lowmemorykiller/parameters/cost
-# echo "73728" > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
 
 ############################
 # Debugging
@@ -126,4 +128,4 @@ echo "0" > /sys/module/msm_pm/parameters/debug_mask
 ############################
 # MPDecision
 #
-start mpdecision # Just in case!
+stop mpdecision # Again, just in case!
