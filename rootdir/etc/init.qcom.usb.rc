@@ -42,7 +42,6 @@ on post-fs-data
     chmod 0660 /sys/class/android_usb/android0/f_cdrom_storage/lun/cdrom_usbmode
     write /sys/class/android_usb/android0/f_cdrom_storage/lun/file /system/usbautorun.iso
 
-# charge_only
 on property:sys.usb.config=none
     stop adbd
     write /sys/class/android_usb/android0/enable 0
@@ -67,7 +66,6 @@ on property:sys.usb.config=adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
-# ecm
 on property:sys.usb.config=ecm
     stop adbd
     write /sys/class/android_usb/android0/enable 0
@@ -115,7 +113,6 @@ on property:sys.usb.config=rndis,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
-# mass_storage
 on property:sys.usb.config=mass_storage
     stop adbd
     write /sys/class/android_usb/android0/enable 0
@@ -140,7 +137,6 @@ on property:sys.usb.config=mass_storage,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
-# MTP
 on property:sys.usb.config=mtp
     stop adbd
     write /sys/class/android_usb/android0/enable 0
@@ -165,7 +161,6 @@ on property:sys.usb.config=mtp,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
-# PTP
 on property:sys.usb.config=ptp
     stop adbd
     write /sys/class/android_usb/android0/enable 0

@@ -57,13 +57,16 @@ on init
 
     symlink /sdcard /storage/sdcard0
 
-    # Setup ZRAM
+    # Setup ZRAM options
     write /sys/block/zram0/comp_algorithm lz4
     write /sys/block/zram0/max_comp_streams 2
 
 on fs
+    # Mount all partitions
     mount_all ./fstab.qcom
+    # Activate swap partition
     swapon_all ./fstab.qcom
+
     restorecon_recursive /persist
     restorecon_recursive /persist-lg
     restorecon_recursive /sns
@@ -131,7 +134,7 @@ on post-fs-data
     mkdir /data/misc/radio 0770 radio radio
 
     # Some blobs have a tendancy to reference the old sensor settings
-    # so create them here, just in case.
+    # so create them here, just in case
     mkdir /data/system/sensors
     chmod 665 /data/system/sensors
     write /data/system/sensors/settings 1
@@ -152,14 +155,11 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on early-boot
-    # set RLIMIT_MEMLOCK to 64MB
+    # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
     # Allow subsystem (modem etc) debugging
     write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
     write /sys/kernel/boot_adsp/boot 1
-
-    # disable lmk_fast_run
-    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
 
 on boot
     # Create QMUX deamon socket area
@@ -175,13 +175,13 @@ on boot
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
-    # communicate with mpdecision and thermald
+    # Communicate with mpdecision and thermald
     mkdir /dev/socket/mpdecision 2770 system system
 
     # Prevents permission denied error for telephony
     chmod 0644 /proc/cmdline
 
-    # bluetooth
+    # Bluetooth
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwake
@@ -194,11 +194,11 @@ on boot
     chmod 0644 /proc/bluetooth/sleep/btwrite
     chmod 0644 /proc/bluetooth/sleep/lpm
 
-    # vibrator
+    # Vibrator
     chown system system /sys/class/timed_output/vibrator/amp
     chmod 0660 /sys/class/timed_output/vibrator/amp
 
-    # led
+    # LED
     chown system system /sys/class/leds/red/brightness
     chown system system /sys/class/leds/green/brightness
     chown system system /sys/class/leds/blue/brightness
@@ -208,7 +208,7 @@ on boot
     chmod 0660 /sys/class/leds/button-backlight1/brightness
     chmod 0660 /sys/class/leds/button-backlight2/brightness
 
-    # lp5521
+    # LP5521
     chown system system /sys/devices/f9967000.i2c/i2c-0/0-0032/led_current_index
     chown system system /sys/devices/f9967000.i2c/i2c-0/0-0032/led_pattern
     chown system system /sys/devices/f9967000.i2c/i2c-0/0-0032/led_blink
@@ -220,14 +220,14 @@ on boot
     chown system system /sys/devices/f9967000.i2c/i2c-0/0-0032/leds/B/led_current
 
     # Assign TCP buffer thresholds to be ceiling value of technology maximums
-    # Increased technology maximums should be reflected here.
+    # Increased technology maximums should be reflected here
     write /proc/sys/net/core/rmem_max  2097152
     write /proc/sys/net/core/wmem_max  2097152
 
     # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
-    # Camera Recording
+    # Camera recording
     mkdir /dev/video
     symlink /dev/video32 /dev/video/venus_dec
     symlink /dev/video33 /dev/video/venus_enc
@@ -249,16 +249,16 @@ on boot
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
-    # the connection they belong to.
+    # the connection they belong to
     # Otherwise, a weird issue happens in which some long
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # create symlink for fb1 as HDMI
+    # Create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
-    # setup permissions for fb1 related nodes
+    # Setup permissions for fb1 related nodes
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system graphics /sys/class/graphics/fb1/vendor_name
     chown system graphics /sys/class/graphics/fb1/product_description
@@ -271,40 +271,37 @@ on boot
     # Enable DEBUG_SUSPEND, DEBUG_EXIT_SUSPEND, and DEBUG_WAKEUP
     write /sys/module/wakelock/parameters/debug_mask 7
 
+    # Broadcom firmware permission
     chown system wifi /sys/module/bcmdhd/parameters/firmware_path
     chmod 0640 /sys/module/bcmdhd/parameters/firmware_path
 
-    # Torch
+    # Torch permission
     chown system camera /sys/class/leds/led:flash_torch/brightness
     chmod 0660 /sys/class/leds/led:flash_torch/brightness
 
-    # Power Supply
+    # Power supply permissions
     chown system system /sys/class/power_supply/ac/charger_timer
     chown system system /sys/class/power_supply/battery/charging_enabled
 
-    # Hardware tunables
+    # Vibrator permission
     chown root system /sys/devices/platform/tspdrv/nforce_timed
     chmod 0664 /sys/devices/platform/tspdrv/nforce_timed
 
-    # Tap to wake
+    # Tap to wake permission
     chown system radio /sys/devices/virtual/input/lge_touch/touch_gesture
     chmod 0664 /sys/devices/virtual/input/lge_touch/touch_gesture
 
-    # SubSystem Restart
+    # SubSystem restart levels
     write /sys/bus/msm_subsys/devices/subsys0/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys1/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
 
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-    write /sys/module/lowmemorykiller/parameters/debug_level 0
-
 on charger
-    # Booting modem
+    # Mount modem partition on /firmware
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
+    # Mount system partition
     wait /dev/block/platform/msm_sdcc.1/by-name/system
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
 
@@ -434,6 +431,6 @@ on property:gsm.version.baseband=""
     start baseband-sh
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
-# but only if ro.data.large_tcp_window_size property is set.
+# but only if ro.data.large_tcp_window_size property is set
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale 2
