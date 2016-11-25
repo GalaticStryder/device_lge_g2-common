@@ -102,6 +102,7 @@ PRODUCT_PACKAGES += \
     init.qcom.power.rc \
     init.qcom.usb.rc \
     init.baseband.sh \
+    lambda-post_boot.sh \
     ueventd.qcom.rc
 
 # IPv6 tethering

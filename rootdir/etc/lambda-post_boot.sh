@@ -12,6 +12,7 @@
 # Kick-off
 #
 stop mpdecision # To avoid troubles...
+echo "[Lambda] Initializing Kernel post-boot script" | tee /dev/kmsg
 
 ############################
 # RQ Stats
@@ -129,3 +130,4 @@ echo "0" > /sys/module/msm_pm/parameters/debug_mask
 # MPDecision
 #
 stop mpdecision # Again, just in case!
+echo "[Lambda] Exiting Kernel post-boot script" | tee /dev/kmsg

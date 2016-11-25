@@ -427,10 +427,12 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-on property:gsm.version.baseband=""
-    start baseband-sh
-
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale 2
+
+# Reload baseband when it's property returns null after remount
+# or any other possible SIM crash or signal loss
+on property:gsm.version.baseband=""
+    start baseband-sh
