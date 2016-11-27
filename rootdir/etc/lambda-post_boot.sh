@@ -12,11 +12,17 @@
 # Kick-off
 #
 stop mpdecision # To avoid troubles...
-echo "[Lambda] Initializing Kernel post-boot script" | tee /dev/kmsg
+echo "[Lambda] Kicking-off post-boot script" | tee /dev/kmsg
+
+############################
+# State Notifier
+#
+echo "1" > /sys/module/state_notifier/parameters/enabled
 
 ############################
 # RQ Stats
 #
+sleep 1
 echo "0" > /sys/devices/system/cpu/cpu0/rq-stats/hotplug_enable
 
 ############################
@@ -50,18 +56,15 @@ echo "19000" > /sys/devices/system/cpu/cpufreq/impulse/min_sample_time
 echo "20000" > /sys/devices/system/cpu/cpufreq/impulse/timer_rate
 
 ############################
-# State Notifier
-#
-echo "1" > /sys/module/state_notifier/parameters/enabled
-
-############################
 # MSM Hotplug
 #
+sleep 1
 echo "1" > /sys/module/msm_hotplug/msm_enabled
 
 ############################
 # MSM Limiter
 #
+sleep 2.5
 echo "impulse" > /sys/kernel/msm_limiter/scaling_governor
 echo "2265600" > /sys/kernel/msm_limiter/resume_max_freq
 echo "1" > /sys/kernel/msm_limiter/debug_mask
@@ -71,6 +74,7 @@ echo "1" > /sys/kernel/msm_limiter/freq_control
 ############################
 # CPU Input Boost
 #
+sleep 0.5
 echo "422400 729600" > /sys/kernel/cpu_input_boost/ib_freqs
 echo "400" > /sys/kernel/cpu_input_boost/ib_duration_ms
 echo "1" > /sys/kernel/cpu_input_boost/enabled
@@ -78,26 +82,21 @@ echo "1" > /sys/kernel/cpu_input_boost/enabled
 ############################
 # GPU
 #
-# TODO: Refactor in Kernel.
-#
-# echo "cpubw_hwmon" > /sys/class/devfreq/qcom,cpubw.42/governor
-# echo "msm-adreno-tz" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
+sleep 0.25
+echo "cpubw_hwmon" > /sys/class/devfreq/qcom,cpubw.42/governor
 
 ############################
 # Scheduler/Read Ahead
 #
+sleep 0.5
 echo "fiops" > /sys/block/mmcblk0/queue/scheduler
 setprop sys.io.scheduler "fiops"
 echo "1024" > /sys/block/mmcblk0/bdi/read_ahead_kb
 
 ############################
-# Random
-#
-echo "256" > /proc/sys/kernel/random/write_wakeup_threshold
-
-############################
 # Swappiness
 #
+sleep 2
 echo "50" > /proc/sys/vm/swappiness
 
 ############################
@@ -105,16 +104,18 @@ echo "50" > /proc/sys/vm/swappiness
 #
 # TODO: Set optimal values.
 #
+sleep 0.5
 echo "1" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 echo "53059" > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
 echo "0" > /sys/module/lowmemorykiller/parameters/debug_level
-# echo "0" > /sys/module/lowmemorykiller/parameters/lmk_fast_run
+echo "0" > /sys/module/lowmemorykiller/parameters/lmk_fast_run
 # echo "18432,23040,24576,28672,31744,34816" > /sys/module/lowmemorykiller/parameters/minfree
 # echo "48" > /sys/module/lowmemorykiller/parameters/cost
 
 ############################
 # Debugging
 #
+sleep 0.25
 echo "0" > /sys/module/alarm_dev/parameters/debug_mask
 echo "0" > /sys/module/lge_touch_core/parameters/debug_mask
 echo "0" > /sys/devices/fe12f000.slim/debug_mask
@@ -129,5 +130,4 @@ echo "0" > /sys/module/msm_pm/parameters/debug_mask
 ############################
 # MPDecision
 #
-stop mpdecision # Again, just in case!
-echo "[Lambda] Exiting Kernel post-boot script" | tee /dev/kmsg
+echo "[Lambda] Exiting post-boot script" | tee /dev/kmsg
