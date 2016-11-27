@@ -587,7 +587,7 @@
         <!-- Speaker Volume -->
         <ctl name="RX7 Digital Volume" value="64" />
         <!-- Earpiece Volume -->
-        <ctl name="RX1 Digital Volume" value="58" />
+        <ctl name="RX1 Digital Volume" value="66" />
         <ctl name="SPK DRV Volume" value="7" />
         <ctl name="SPK DAC Switch" value="1" />
         <ctl name="DAC1 Switch" value="1" />
