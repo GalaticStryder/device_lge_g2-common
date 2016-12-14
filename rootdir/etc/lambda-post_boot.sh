@@ -15,14 +15,9 @@ stop mpdecision # To avoid troubles...
 echo "[Lambda] Kicking-off post-boot script" | tee /dev/kmsg
 
 ############################
-# State Notifier
-#
-echo "1" > /sys/module/state_notifier/parameters/enabled
-
-############################
 # RQ Stats
 #
-sleep 1.5
+sleep 1
 echo "0" > /sys/devices/system/cpu/cpu0/rq-stats/hotplug_enable
 
 ############################
@@ -34,9 +29,9 @@ echo "1" > /sys/module/msm_hotplug/msm_enabled
 ############################
 # MSM Limiter
 #
-sleep 2.5
+sleep 1.5
 echo "2265600" > /sys/kernel/msm_limiter/resume_max_freq
-echo "0" > /sys/kernel/msm_limiter/debug_mask
+echo "1" > /sys/kernel/msm_limiter/debug_mask
 echo "0" > /sys/kernel/msm_limiter/mpd_enabled
 echo "1" > /sys/kernel/msm_limiter/freq_control
 
@@ -49,13 +44,13 @@ echo "fiops" > /sys/block/mmcblk0/queue/scheduler
 ############################
 # Swappiness
 #
-sleep 1
+sleep 0.5
 echo "50" > /proc/sys/vm/swappiness
 
 ############################
 # LMK
 #
-sleep 1
+sleep 0.5
 echo "18432,23040,24576,28672,31744,34816" > /sys/module/lowmemorykiller/parameters/minfree
 echo "48" > /sys/module/lowmemorykiller/parameters/cost
 echo "73728" > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
