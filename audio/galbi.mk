@@ -41,13 +41,11 @@ AUDIO_FEATURE_ENABLED_AUXPCM_BT := false
 AUDIO_FEATURE_PCM_IOCTL_ENABLED := true
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
 AUDIO_FEATURE_ENABLED_EXTN_POST_PROC := true
-#DTS_CODEC_M_ := true TODO: Backport this codec from Alcatel.
-DOLBY_DDP := true
-DOLBY_DAP := true
+DOLBY_DDP := false
+DOLBY_DAP := false
 TARGET_USES_QCOM_MM_AUDIO := true
 
 # XML
-# The $LOCAL_PATH variable is device/lge/g2-common, not this file/directory.
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
@@ -74,7 +72,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecall=true \
     ro.qc.sdk.audio.fluencetype=fluence \
-    ro.config.vc_call_vol_steps=8
+    ro.config.vc_call_vol_steps=10
 
 # Output
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -86,9 +84,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Offload
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.deep_buffer.media=true \
+    audio.deep_buffer.media=false \
     audio.offload.buffer.size.kb=32 \
     audio.offload.gapless.enabled=true \
     audio.offload.multiple.enabled=false \
     audio.offload.track.enable=true \
-    audio.offload.video=true
+    audio.offload.video=false
