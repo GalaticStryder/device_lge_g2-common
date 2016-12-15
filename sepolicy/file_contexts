@@ -34,9 +34,6 @@
 # Baseband
 /firmware/image/modem(/.*)?                         u:object_r:firmware_device:s0
 
-# Thermal
-/system/bin/thermal-engine                          u:object_r:thermal-engine_exec:s0
-
 # Vibrator
 /sys/devices/virtual/input/lge_touch(/.*)?          u:object_r:sysfs_touchpanel:s0
 /sys/devices/platform/tspdrv/nforce_timed           u:object_r:sysfs_vibeamp:s0
