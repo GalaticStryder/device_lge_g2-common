@@ -18,7 +18,7 @@
 $(call inherit-product, vendor/lge/g2-common/g2-common-vendor.mk)
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay-cm
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -52,6 +52,11 @@ include $(LOCAL_PATH)/system_prop.mk
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Boot animation
+TARGET_BOOTANIMATION_HALF_RES := true
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
+
 # Audio
 include $(LOCAL_PATH)/audio/galbi.mk
 
@@ -64,14 +69,10 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    SnapdragonCamera \
+    Snap \
     camera.msm8974 \
     libboringssl-compat \
     libstlport
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
 
 # Display
 PRODUCT_PACKAGES += \
@@ -79,6 +80,10 @@ PRODUCT_PACKAGES += \
     gralloc.msm8974 \
     hwcomposer.msm8974 \
     memtrack.msm8974
+
+# Gello
+PRODUCT_PACKAGES += \
+    Gello
 
 # Doze
 PRODUCT_PACKAGES += \
