@@ -104,6 +104,7 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Qualcomm's Time Daemon
 BOARD_USES_QC_TIME_SERVICES := true
+BOARD_USES_LEGACY_QC_TIME_SERVICES := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB = device/lge/g2-common/rootdir/etc/fstab.qcom
