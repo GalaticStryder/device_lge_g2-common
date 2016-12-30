@@ -80,10 +80,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
     memtrack.msm8974
 
-# Doze
-PRODUCT_PACKAGES += \
-    OneplusDoze
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8974
