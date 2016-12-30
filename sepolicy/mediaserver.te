@@ -1,2 +1,7 @@
 allow mediaserver persist_drm_file:dir search;
 allow mediaserver persist_drm_file:file rw_file_perms;
+allow mediaserver camera_device:dir search;
+allow mediaserver camera_device:chr_file rw_file_perms;
+allow mediaserver audio_device:chr_file rw_file_perms;
+
+allow mediaserver system_file:file execmod;
