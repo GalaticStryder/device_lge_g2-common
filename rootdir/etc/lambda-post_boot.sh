@@ -16,22 +16,6 @@ stop mpdecision # To avoid troubles...
 echo "[λ] Kicking-off post-boot script" | tee /dev/kmsg
 
 ############################
-# Simple Thermal
-#
-sleep 1
-echo "0" > /sys/kernel/msm_thermal/enabled
-echo "1728000 39 38" > /sys/kernel/msm_thermal/zone0
-echo "1574400 42 40" > /sys/kernel/msm_thermal/zone1
-echo "1497600 45 43" > /sys/kernel/msm_thermal/zone2
-echo "1267200 49 46" > /sys/kernel/msm_thermal/zone3
-echo "1190400 53 50" > /sys/kernel/msm_thermal/zone4
-echo "1036800 56 54" > /sys/kernel/msm_thermal/zone5
-echo "960000 62 60" > /sys/kernel/msm_thermal/zone6
-echo "729600 79 75" > /sys/kernel/msm_thermal/zone7
-echo "8000" > /sys/kernel/msm_thermal/sampling_ms
-echo "1" > /sys/kernel/msm_thermal/enabled
-
-############################
 # MSM Limiter
 #
 sleep 1
