@@ -374,15 +374,17 @@ service sensors /system/bin/sensors.qcom
     user root
     group root wakelock
 
-service baseband-sh /system/bin/sh /init.baseband.sh
+service set_baseband /system/bin/set_baseband.sh
     class late_start
-    user root
+    user system
+    group shell
     oneshot
     disabled
 
 service post-boot-sh /system/bin/sh /lambda-post_boot.sh
     class late_start
     user root
+    seclabel u:r:init:s0
     oneshot
     disabled
 
@@ -436,4 +438,4 @@ on property:ro.data.large_tcp_window_size=true
 # Reload baseband when it's property returns null after remount
 # or any other possible SIM crash or signal loss
 on property:gsm.version.baseband=""
-    start baseband-sh
+    start set_baseband

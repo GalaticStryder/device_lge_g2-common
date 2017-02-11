@@ -5,3 +5,4 @@ allow system_server sysfs_usb_supply:dir search;
 allow system_server sysfs_usb_supply:file r_file_perms;
 allow system_server sysfs_vibeamp:file rw_file_perms;
 allow system_server rtc_device:chr_file rw_file_perms;
+allow system_server baseband_prop:file r_file_perms;

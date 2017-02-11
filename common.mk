@@ -97,7 +97,7 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.power.rc \
     init.qcom.usb.rc \
-    init.baseband.sh \
+    set_baseband.sh \
     lambda-post_boot.sh \
     ueventd.qcom.rc
 
