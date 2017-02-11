@@ -16,6 +16,18 @@ stop mpdecision # To avoid troubles...
 echo "[λ] Kicking-off post-boot script" | tee /dev/kmsg
 
 ############################
+# RQ Stats
+#
+sleep 0.5
+echo "0" > /sys/devices/system/cpu/cpu0/rq-stats/hotplug_enable
+
+############################
+# AutoSMP
+#
+sleep 1
+echo "1" > /sys/module/autosmp/parameters/enabled
+
+############################
 # MSM Limiter
 #
 sleep 1
@@ -58,6 +70,16 @@ echo "0" > /sys/module/lowmemorykiller/parameters/lmk_fast_run
 echo "0" > /sys/module/lowmemorykiller/parameters/debug_level
 
 ############################
+# Sound Control
+#
+sleep 0.5
+echo "0" > /sys/kernel/sound_control_3/lge_stweaks_control
+echo "254 254" > /sys/kernel/sound_control_3/lge_headphone_gain
+echo "1 1" > /sys/kernel/sound_control_3/lge_speaker_gain
+echo "4" > /sys/kernel/sound_control_3/lge_mic_gain
+echo "3" > /sys/kernel/sound_control_3/lge_cam_mic_gain
+
+############################
 # Debugging
 #
 sleep 1
@@ -77,4 +99,3 @@ echo "0" > /sys/module/msm_pm/parameters/debug_mask
 #
 sleep 3
 echo "[λ] Exiting post-boot script" | tee /dev/kmsg
-start mpdecision

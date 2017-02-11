@@ -75,7 +75,7 @@ on enable-low-power
 
     write /sys/module/msm_thermal/core_control/enabled 1
 
-    write /dev/cpuctl/cpu.notify_on_migrate 1
+    write /dev/cpuctl/cpu.notify_on_migrate 0
 
     write /sys/class/devfreq/qcom,cpubw.42/governor cpubw_hwmon
     write /sys/class/devfreq/qcom,cpubw.42/polling_interval 50
@@ -98,6 +98,6 @@ on boot
 
 on property:dev.bootcomplete=1
     setprop sys.io.scheduler "fiops"
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 256
     rm /data/system/perfd/default_values
     start post-boot-sh
