@@ -386,6 +386,11 @@ service post-boot-sh /system/bin/sh /lambda-post_boot.sh
     oneshot
     disabled
 
+service thermal-engine /system/bin/thermal-engine
+    class main
+    user root
+    group root
+
 service time_daemon /system/bin/time_daemon
     class late_start
     user root
